@@ -28,10 +28,14 @@ def copy_and_sort_files(source_dir, destination_dir):
         print(f"Error processing directory {source_dir}: {e}")
 
 def main():
-    fakedir.create()
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <source_directory> [destination_directory]")
+        sys.exit(1)
 
-    source_dir = os.path.expanduser("/Users/siangicher/Documents/Projects/homework/goit-algo-hw-03/goit-algo-hw-03/test_folders")
-    destination_dir = os.path.expanduser("/Users/siangicher/Documents/Projects/homework/goit-algo-hw-03/goit-algo-hw-03/destination")
+    source_dir = os.path.abspath(sys.argv[1])
+    destination_dir = os.path.abspath(sys.argv[2]) if len(sys.argv) > 2 else os.path.join(os.getcwd(), "dist")
+
+    fakedir.create(source_dir)
 
     if not os.path.exists(source_dir):
         print(f"Source directory {source_dir} does not exist.")

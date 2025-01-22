@@ -11,14 +11,9 @@ from fpdf import FPDF
 faker = Faker()
 
 # Define the base directory
-base_directory = "test_folders"
+base_directory = "test"
 folders = ["folder_1", "folder_2", "folder_3", "folder_4"]
 file_types = ['pdf', 'png', 'docx']
-
-# Ensure the base directory is clean
-if os.path.exists(base_directory):
-    shutil.rmtree(base_directory)
-os.makedirs(base_directory)
 
 # Function to create a sample PDF
 def create_pdf(file_path, content):
@@ -40,7 +35,12 @@ def create_docx(file_path, content):
     doc.add_paragraph(content)
     doc.save(file_path)
 
-def create():
+def create(dir):
+    base_directory = dir
+    # Ensure the base directory is clean
+    if os.path.exists(base_directory):
+        shutil.rmtree(base_directory)
+    os.makedirs(base_directory)
     # Create folders and populate with files
     for folder in folders:
         folder_path = os.path.join(base_directory, folder)
